@@ -1,33 +1,17 @@
-from playwright.sync_api import sync_playwright
-otpcode = '357159'
+from pages.login_page import LoginPage
 
-with sync_playwright() as p:
-    
-    browser = p.chromium.launch(headless=False) 
-    page = browser.new_page()
-    page.goto("https://biznes.openbank.uz/login")
-    page.screenshot(path="screenshot.png")
-    page.fill("input[placeholder='Telefon raqami']", "901340078")
-    page.click("button[type='submit']")
-    inputs = page.locator("input[type='tel']")
-    page.screenshot(path="screenshot.png")
-    for i in range(len(otpcode)):
-        inputs.nth(i).fill(otpcode[i])
-    page.wait_for_timeout(500)   
-    page.screenshot(path="screenshot.png")
-    page.fill(".mantine-1sihklk", "Smartbank12")
-    page.click("button[type='submit']")
+def test_login(page):
+    login = LoginPage(page)
 
-    page.click(".logout")
-    page.get_by_text("Bekor qilish").click()
+    login.open()
+    login.login()
+   
+    cancel_btn = page.get_by_test_id("onesignal-slidedown-cancel-button")
+    if cancel_btn.is_visible():
+        cancel_btn.click()
+    page.locator(".mantine-1ryt1ht").get_by_text("Barcha hisoblar").click()
+    page.locator(".mantine-1ryt1ht").get_by_text("Barchasi").click()
+    page.locator(".mantine-1ryt1ht").get_by_text("UZS").click()
+    page.locator(".mantine-1ryt1ht").get_by_text("USD").click()
+    page.locator(".mantine-1ryt1ht").get_by_text("RUB").click()
 
-    page.wait_for_timeout(500)   
-
-    page.click(".logout")
-    page.get_by_text("Tasdiqlash").click()
-
-
-
-    page.wait_for_timeout(5000)  
-    # browser.close()
-    
