@@ -7,4 +7,4 @@ with sync_playwright() as p:
     page.expect_response('100')
     page.screenshot(path="screenshot.png")
     browser.close()
-    #test1234
+    
