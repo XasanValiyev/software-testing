@@ -10,16 +10,14 @@ class LoginPage:
     def login(self):
 
         self.page.fill("input[placeholder='Telefon raqami']", phone_director)
-
         self.page.click("button[type='submit']")
-
         otp_inputs = self.page.locator("input[type='tel']")
         for i in range(len(otpcode)):
             otp_inputs.nth(i).fill(otpcode[i])
-            
-        
         self.page.fill("input[type='password']", password_director)
         #self.page.click("button[type='submit']")
+
+        # changing password
         self.page.get_by_text("Parolni unutdingizmi?").click()
         otp_inputs = self.page.locator("input[type='tel']")
         otp_inputs.first.wait_for()

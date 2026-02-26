@@ -8,7 +8,11 @@ def test_login(page):
     login.open()
     login.login()
     page.wait_for_load_state("networkidle")
+    
+    # clicks Later button 
     page.locator("#onesignal-slidedown-cancel-button").click()
+    
+    # checking tabs_account_currency
     page.locator(".mantine-1ryt1ht").get_by_text("Barcha hisoblar").click()
     page.locator(".mantine-1ryt1ht").get_by_text("UZS").click()
     amounts = page.locator(".amount")
@@ -25,20 +29,10 @@ def test_login(page):
     for i in range(amounts.count()):
         expect(amounts.nth(i)).to_contain_text("RUB")
     
-
-
-
+    
 
 
    
-    # page.locator(input["type='button'"]).get_by_text("UZS").click()
-    # page.wait
-
-    # page.locator(input["type='button'"]).get_by_text("USD").click()
-    # page.wait
-
-    # page.locator(input["type='button'"]).get_by_text("RUB").click()
-    # page.wait
 
 
     
