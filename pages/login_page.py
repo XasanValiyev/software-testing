@@ -29,3 +29,4 @@ class LoginPage:
         self.page.get_by_text('Davom etish').click()
         self.page.fill("input[type='password']", password_director)
         self.page.locator(".mantine-1ryt1ht").get_by_text("Kirish").click()
+        

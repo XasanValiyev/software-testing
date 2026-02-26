@@ -29,11 +29,28 @@ def test_login(page):
     for i in range(amounts.count()):
         expect(amounts.nth(i)).to_contain_text("RUB")
     
+    # checking main account 
+    page.locator(".mantine-1ryt1ht").get_by_text("Barchasi").click()    
+    main_account = page.locator(".account")
+    texts = main_account.all_inner_texts()
+    has_main_account = any(t.strip().endswith("001") for t in texts)
+    kartoteka_link = page.locator('a[href="/kartoteka"]').filter(has_text="Kartoteka")
+    if has_main_account:
+        page.locator(".back_btn").click()
+        expect(kartoteka_link.first).to_be_visible()
+        
+    else:
+        page.locator(".back_btn").click()
+        expect(kartoteka_link).to_have_count(0)
     
+
+
+
+
+
+
+
+
 
 
    
-
-
-    
-
