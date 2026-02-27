@@ -34,11 +34,11 @@ def test_login(page):
     main_account = page.locator(".account")
     texts = main_account.all_inner_texts()
     has_main_account = any(t.strip().endswith("001") for t in texts)
-    kartoteka_link = page.locator('a[href="/kartoteka"]').filter(has_text="Kartoteka")
+    kartoteka_link = page.locator('a[href="/kartoteka"]').get_by_text("Kartoteka")
     if has_main_account:
         page.locator(".back_btn").click()
-        expect(kartoteka_link.first).to_be_visible()
-        
+        kartoteka = page.get_by_role("link", name="Kartoteka").first
+        kartoteka.click()
     else:
         page.locator(".back_btn").click()
         expect(kartoteka_link).to_have_count(0)
