@@ -29,4 +29,11 @@ class LoginPage:
         self.page.get_by_text('Davom etish').click()
         self.page.fill("input[type='password']", password_director)
         self.page.locator(".mantine-1ryt1ht").get_by_text("Kirish").click()
-        
+        # self.page.wait_for_load_state("networkidle")
+
+    def close_notification(self):
+        try:
+            self.page.locator("#onesignal-slidedown-cancel-button").click(timeout=3000)
+        except:
+            pass
+            
