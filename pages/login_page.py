@@ -1,4 +1,5 @@
 from config.settings import base_url, otpcode, phone_director, password_director
+from playwright.sync_api import expect
 import allure
 
 class LoginPage:
@@ -20,6 +21,11 @@ class LoginPage:
         self.page.fill("input[type='password']", password_director)
         #self.page.click("button[type='submit']")
 
+    def close_main_modal(self):
+        close_modal = self.page.get_by_role("button", name="Bekor qilish")
+        expect(close_modal).to_be_visible()
+        close_modal.click()
+
     @allure.step("Changing password")
     def change_password(self):   
         self.page.get_by_text("Parolni unutdingizmi?").click()
@@ -37,8 +43,8 @@ class LoginPage:
 
     @allure.step("closing login notification")
     def close_notification(self):
-        try:
-            self.page.locator("#onesignal-slidedown-cancel-button").click(timeout=3000)
-        except:
-            pass
+        close_top_modal = self.page.locator("#onesignal-slidedown-cancel-button")
+        expect(close_top_modal).to_be_visible()
+        close_top_modal.click()
             
+        

@@ -3,8 +3,9 @@ from pages.account_page import Accounts
 from pages.kartoteka import Kartoteka
 from pages.create_payment import Payment
 from pages.tabs_page import Tabs
+from pages.products_page import MyProducts
 from playwright.sync_api import expect
-import allure
+import allure 
 
 
 @allure.feature("Accounts")
@@ -15,6 +16,7 @@ def test(page):
     login.login()
     login.change_password()
     login.close_notification()
+    login.close_main_modal()
     
     tabs = Tabs(page)
     tabs.main_tab()
@@ -33,6 +35,12 @@ def test(page):
     payments.click_payment_tab()
     payments.between_my_acocunts()
 
+    products = MyProducts(page)
+    products.click_salary_carousell()
+    tabs.main_tab()
+    products.click_qr_code_carousell()
+    tabs.main_tab()
+    products.click_kartoteka_carousell()
     
 
 

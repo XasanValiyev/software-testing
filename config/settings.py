@@ -7,3 +7,4 @@ summ = 1
 textarea_text = "test sinov tariqasida 1 som o'tkazilmoqda"
 
 # Allure
+#add checking path/url
