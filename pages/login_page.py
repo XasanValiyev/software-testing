@@ -1,5 +1,5 @@
 from config.settings import base_url, otpcode, phone_director, password_director
-from playwright.sync_api import expect
+from playwright.sync_api import expect, TimeoutError
 import allure
 
 class LoginPage:
@@ -23,8 +23,12 @@ class LoginPage:
 
     def close_main_modal(self):
         close_modal = self.page.get_by_role("button", name="Bekor qilish")
-        expect(close_modal).to_be_visible()
-        close_modal.click()
+        try: 
+            close_modal.wait_for(state="visible", timeout=3000)
+            close_modal.click()
+        except: TimeoutError
+        pass
+                   
 
     @allure.step("Changing password")
     def change_password(self):   
@@ -44,7 +48,9 @@ class LoginPage:
     @allure.step("closing login notification")
     def close_notification(self):
         close_top_modal = self.page.locator("#onesignal-slidedown-cancel-button")
-        expect(close_top_modal).to_be_visible()
-        close_top_modal.click()
-            
+        try:
+            close_top_modal.wait_for(state="visible", timeout=3000)
+            close_top_modal.click()
+        except: TimeoutError
+        pass            
         

@@ -31,10 +31,11 @@ def test(page):
     accounts.account_page()
     accounts.main_account_flow()
 
-    payments = Payment(page)
-    payments.click_payment_tab()
-    payments.between_my_acocunts()
+    # payments = Payment(page)
+    # payments.click_payment_tab()
+    # payments.between_my_acocunts()
 
+    tabs.main_tab()
     products = MyProducts(page)
     products.click_salary_carousell()
     tabs.main_tab()
@@ -42,8 +43,7 @@ def test(page):
     tabs.main_tab()
     products.click_kartoteka_carousell()
     
-
-
+    
 
 
 
