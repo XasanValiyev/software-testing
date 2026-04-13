@@ -19,15 +19,16 @@ class LoginPage:
         for i in range(len(otpcode)):
             otp_inputs.nth(i).fill(otpcode[i])
         self.page.fill("input[type='password']", password_director)
-        #self.page.click("button[type='submit']")
+        # self.page.click("button[type='submit']")  
 
-    def close_main_modal(self):
-        close_modal = self.page.get_by_role("button", name="Bekor qilish")
-        try: 
-            close_modal.wait_for(state="visible", timeout=3000)
-            close_modal.click()
-        except: TimeoutError
-        pass
+    # def close_main_modal(self):
+    #     close_modal = self.page.get_by_role("button")
+    #     close_modal = self.page.locator("#onesignal-slidedown-cancel-button")
+    #     try: 
+    #         close_modal.wait_for(state="visible", timeout=3000)
+    #         close_modal.click()
+    #     except: TimeoutError
+    #     pass
                    
 
     @allure.step("Changing password")
@@ -42,7 +43,10 @@ class LoginPage:
         self.page.mouse.wheel(0, 2000)
         self.page.get_by_text('Davom etish').click()
         self.page.fill("input[type='password']", password_director)
-        self.page.locator(".mantine-1ryt1ht").get_by_text("Kirish").click()
+        self.page.click("button[type='submit']")
+        # self.page.locator(".mantine-1ryt1ht").get_by_text("Kirish").click()
+  
+
         # self.page.wait_for_load_state("networkidle")
 
     @allure.step("closing login notification")

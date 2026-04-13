@@ -1,6 +1,7 @@
 from playwright.sync_api import expect
 from pages.navigation import GoBack
 from pages.kartoteka import Kartoteka
+from config.settings import base_api 
 import allure
 
 class Accounts:
@@ -9,21 +10,24 @@ class Accounts:
         self.kartoteka = Kartoteka(page)
         self.goback = GoBack(page)
 
+
+    # async def navigate(self):
+    #     await self.page.goto("{base_url}/currency/list")
+        
     @allure.step("Check currency")
     def account_page(self):
-        
-        self.page.locator(".mantine-1ryt1ht").get_by_text("Barcha hisoblar").click()
-        self.page.locator(".mantine-1ryt1ht").get_by_text("UZS").click()
+        self.page.get_by_text("Barcha hisoblar").click()
+        self.page.get_by_role("button", name="UZS").click()
         amounts = self.page.locator(".amount")
         for i in range(amounts.count()):
             expect(amounts.nth(i)).to_contain_text("UZS")
         
-        self.page.locator(".mantine-1ryt1ht").get_by_text("USD").click()
+        self.page.get_by_role("button", name="USD").click()
         amounts = self.page.locator(".amount")
         for i in range(amounts.count()):
             expect(amounts.nth(i)).to_contain_text("USD")
 
-        self.page.locator(".mantine-1ryt1ht").get_by_text("RUB").click()
+        self.page.get_by_role("button", name="RUB").click()
         amounts = self.page.locator(".amount")
         for i in range(amounts.count()):
             expect(amounts.nth(i)).to_contain_text("RUB")

@@ -1,5 +1,6 @@
 otpcode = '357159'
-base_url = "https://biznes.openbank.uz/login"
+base_url = "https://biznes.openbank.uz/"
+base_api = "https://app.smartbank.uz/legal/"
 phone_director = "901340078"
 password_director = "Smartbank12"
 doc_number = "12"

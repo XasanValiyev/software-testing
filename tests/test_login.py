@@ -16,7 +16,7 @@ def test(page):
     login.login()
     login.change_password()
     login.close_notification()
-    login.close_main_modal()
+    # login.close_main_modal()
     
     tabs = Tabs(page)
     tabs.main_tab()
@@ -25,9 +25,9 @@ def test(page):
     tabs.reports_tab()
     tabs.foreignET_tab()
     tabs.profile_tab()
-
     tabs.main_tab()
     accounts = Accounts(page)
+    # accounts.navigate()
     accounts.account_page()
     accounts.main_account_flow()
 
@@ -42,6 +42,8 @@ def test(page):
     products.click_qr_code_carousell()
     tabs.main_tab()
     products.click_kartoteka_carousell()
+
+    
     
     
 
