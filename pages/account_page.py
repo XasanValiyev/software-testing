@@ -32,6 +32,21 @@ class Accounts:
         for i in range(amounts.count()):
             expect(amounts.nth(i)).to_contain_text("RUB")
 
+    @allure.step("Open currency account")
+    def open_account(self):
+        self.page.get_by_class(".plus-btn").click()
+        self.page.get_by_role("link", name="Hisob raqam ochish").click()
+        self.page.wait_for_url("**/currency/rules")
+        assert self.page.url == "https://dev-biznes.smartbank.uz/currency/rules"
+        assert self.page.get_by_role("button", name="Arizani bankka jo'natish").is_disabled()
+        self.page.get_by_role("button", name="Valyuta hisob raqami ochish").click()
+        self.page.get_by_role("checkbox", name="RUB").click()
+        assert self.page.get_by_role("button", name="Arizani bankka jo'natish").is_enabled()
+        self.page.get_by_role("link", "Orqaga").click()
+        self.page.get_by_role("link", "Orqaga").click()
+        self.page.get_by_role("link", "Orqaga").click()
+
+
     @allure.step("Search for a main account ending with 001")
     def main_account(self)->bool:
         self.page.get_by_text("Barchasi").click()
